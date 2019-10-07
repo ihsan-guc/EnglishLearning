@@ -1,0 +1,38 @@
+﻿@model List<EnglishLearning.Models.Word>
+@{
+    /**/
+
+    ViewBag.Title = "Words";
+}
+<h2>Words</h2>
+@Html.ActionLink("Add", "Add", "AddWord", new { @class = "btn btn-outline-dark"})
+<hr style="border-color:black" />
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Value</th>
+            <th>TranslateValue</th>
+            <th>Type</th>
+            <th>Level</th>
+            <th>operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Value</td>
+                <td>@item.TranslateValue</td>
+                <td>@item.Type</td>
+                <td>@item.Level</td>
+                <td>@Html.ActionLink("Update", "Update", "AddWord", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
+                    @Html.ActionLink("Delete","Delete","AddWord", new { id = item.Id }, new { @class = "btn btn-outline-success" })
+                </td>
+            </tr>
+            @Html.HiddenFor(p => item.Id)
+        }
+    </tbody>
+</table>

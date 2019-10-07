@@ -1,0 +1,37 @@
+﻿@model EnglishLearning.Models.Word
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+    .clearfix {
+        font-size: 19px;
+    }
+</style>
+<h2>Delete Word</h2>
+<div class="panel panel-primary">
+    <div class="panel panel-default">
+        <div class=" panel-heading">
+
+            <div class="panel-body">
+                <div class="clearfix"><b>@Html.LabelFor(p => p.TranslateValue)</b> : @Html.DisplayFor(m => m.TranslateValue)</div>
+                <div class="clearfix"><b>@Html.LabelFor(p => p.Value)</b> : @Html.DisplayFor(m => m.Value)</div>
+                <div class="clearfix"><b>@Html.LabelFor(p => p.Type)</b> : @Html.DisplayFor(m => m.Type)</div>
+                <div class="clearfix"><b>@Html.LabelFor(p => p.Level)</b> : @Html.DisplayFor(m => m.Level)</div>
+            </div>
+            <h4>
+                <br />
+                <small>
+                    <i class="glyphicon glyphicon-calendar"></i>
+                    <b>@Html.LabelFor(p => p.Date)</b> : @Html.DisplayFor(m => m.Date)
+                </small>
+            </h4>
+            <div class="panel-footer">
+                @using (Html.BeginForm("Deleteconfirmation", "AddWord", FormMethod.Post, null))
+                {
+                    @Html.HiddenFor(p => p.Id)
+                    <button class="btn btn-danger" type="submit">Yes, I'm sure</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

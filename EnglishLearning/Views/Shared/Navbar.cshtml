@@ -1,0 +1,39 @@
+﻿<style>
+    a{
+        font-size:17px;
+    }
+    .btn-outline-success
+    {
+        font-weight:500
+    }
+    #Signup{
+        display:none
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/Home">English Learning </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/AddWord">Add</a>
+                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="~/LearningWords">Learning Words</a>
+            </li>
+            @if (User.IsInRole("A"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Users">Users</a>
+                </li>
+            }
+        </ul>
+        <ul class="navbar-nav mr-lg-4" id="Login">
+            <li class="nav-item mr-4">
+                <a class="btn btn-outline-danger" href="Security/Logout">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>

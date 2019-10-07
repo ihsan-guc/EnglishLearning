@@ -1,0 +1,93 @@
+﻿@model EnglishLearning.Models.Word
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = "LearningWords";
+}
+
+<h2>Learning Words</h2>
+@using (Html.BeginForm("Index", "LearningWords",
+    FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.Value)
+        @Html.TextBoxFor(i => i.Value, new { @class = "form-control" })
+    </div>
+    <div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.TranslateValue)
+        @Html.TextBoxFor(i => i.TranslateValue, new { @class = "form-control" })
+    </div>
+    <div>
+        <fieldset>
+            @Html.LabelFor(i => i.Type)
+            <select id="Type" name="Type" class="form-control">
+                <option value="0">Adjective</option>
+                <option value="1">Noun</option>
+                <option value="2">Verb</option>
+                <option value="3">Adverb</option>
+            </select>
+        </fieldset>
+    </div>
+    @Html.TextBoxFor(p => p.Id)
+    <br />
+    <div>
+        @Html.HiddenFor(p => p.Id)
+    </div>
+    <div>@Html.ViewBag.Message</div>
+    <button type="submit" class="btn btn-warning" id="Reply">Reply</button>
+    <input type="button" class="btn btn-success" id="SetWordToScreen" value="Kelime Getir" />
+    @section scripts
+{
+        <script type="text/javascript">
+            $("#Value").prop("disabled", true);
+            $("#Type").prop("disabled", true);
+            $("#Id").attr("hidden", true);
+            $("#TranslateValue").val("")
+            $("#Type").val("")
+            $(document).ready(function () {
+                $("#SetWordToScreen").click(function () {
+                    $.getJSON('/LearningWords/WordToScreen', function (id) {
+                        $.ajax({
+                            url: '/LearningWords/SetWordToScreen/' + id,
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function (data) {
+                                $("#Value").val(data.Value);
+                                $("#Type").val(data.Type);
+                                $("#Id").val(data.Id)
+                                $("#TranslateValue").val("")
+                            }
+                        })
+                    }
+                    );
+                });
+            });
+            $(document).ready(function () {
+                $("#Reply").click(function () {
+                    $.ajax({
+                        url: "/LearningWords/Reply",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            'Id': $("#Id").val(),
+                            'TranslateValue': $("#TranslateValue").val()
+                        },
+                        cache: false,
+                        success: function (data) {
+                            if (data != false) {
+                                alert("Başarılı");
+                            }
+                            else {
+                                alert("Başarısız");
+                            }
+                        }
+                    })
+                })
+            });
+        </script>
+    }
+}

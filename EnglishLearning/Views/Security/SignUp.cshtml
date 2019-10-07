@@ -1,0 +1,72 @@
+﻿@model EnglishLearning.Models.Users
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<style>
+    .note {
+        text-align: center;
+        height: 80px;
+        background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+        color: #fff;
+        font-weight: bold;
+        line-height: 80px;
+    }
+    .navbar{
+        display:none;
+    }
+    .form-content {
+        padding: 5%;
+        border: 1px solid #ced4da;
+        margin-bottom: 2%;
+    }
+
+    .form-control {
+        border-radius: 1.5rem;
+    }
+    .container
+    {
+        max-width:900px;
+    }
+    .btnSubmit {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 1%;
+        width: 20%;
+        cursor: pointer;
+        background: #0062cc;
+        color: #fff;
+        float:right;
+    }
+</style>
+<div class="container">
+    <div class="form">
+        <div class="note">
+            <p>This is a simpleRegister Form made using Boostrap.</p>
+        </div>
+        @using (Html.BeginForm("SignUp", "Security", FormMethod.Post))
+        {
+            <div class="form-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.User, new { @class = "form-control", @placeholder = "Your User" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.Password, new { @class = "form-control", @placeholder = "Your Password" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(p => p.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    @Html.ViewBag.Message
+                </div>
+                @Html.HiddenFor(p=>p.Id)
+                <button type="submit" class="btn btn-outline-danger" style="float:right;width:20%;border-radius:20px">Submit</button>
+                <a href="/Security/Login" class="btn btn-dark">Login</a>
+            </div>
+        }
+    </div>
+</div>

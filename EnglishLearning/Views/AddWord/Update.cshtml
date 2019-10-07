@@ -1,0 +1,41 @@
+﻿@model EnglishLearning.Models.Word
+@{
+    ViewBag.Title = "Update";
+}
+<h2>Update</h2>
+@using (Html.BeginForm("Update", "AddWord", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(p => p.Id)
+    <div class="panel panel-primary">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="clearfix">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.Value)
+                        @Html.TextBoxFor(p => p.Value, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.TranslateValue)
+                        @Html.TextBoxFor(p => p.TranslateValue, new { @class = "form-control" })
+                    </div>
+                    <div>
+                        <fieldset>
+                            @Html.LabelFor(i => i.Type)
+                            <select id="Type" name="Type" class="form-control">
+                                <option value="0">Adjective</option>
+                                <option value="1">Noun</option>
+                                <option value="2">Verb</option>
+                                <option value="3">Adverb</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" type="submit">Kaydet</button>
+            </div>
+        </div>
+
+    </div>
+}
